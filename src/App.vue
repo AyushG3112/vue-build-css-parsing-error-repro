@@ -1,17 +1,35 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button @click=loaderShow>Show Loader</button>
+     <loading
+     :show="showLoader"
+     :label="loaderLabel">
+ </loading>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Vue from 'vue';
+import Loading from 'vue-full-loading';
+
+Vue.use(Loading);
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Loading
+  },
+  data() {
+    return {
+      showLoader: false,
+      loaderLabel: "Loading"
+    }
+  },
+  methods: {
+    loaderShow() {
+      this.showLoader = true;
+      setTimeout(() => this.showLoader = false, 10000)
+    }
   }
 }
 </script>
